@@ -23,7 +23,7 @@ public class PruebaServlet extends HttpServlet {
 		pw.println("	<title>Prueba</title>");
 		pw.println("</head>");
 		pw.println("<body>");
-		pw.println("	<form>");
+		pw.println("	<form method='post' action='/basico-web/procesar-prueba'>");
 		pw.println("		<table border='1'>");
 		pw.println("			<tr>");
 		pw.println("				<td>Días necesarios:</td>");
