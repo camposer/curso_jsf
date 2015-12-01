@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import servlet.form.PruebaForm;
+
 @WebServlet("/procesar-prueba")
 public class ProcesarPruebaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,25 +27,57 @@ public class ProcesarPruebaServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String comentarios = request.getParameter("comentarios");
 		String oculto = request.getParameter("oculto");
-
+		
+		// Llenado de form
+		PruebaForm pruebaForm = 
+				new PruebaForm(dias, notificaciones, 
+				cantidad, nombre, comentarios, oculto);
+		
 		// Validaciones
-		// Días
-		try { 
-			Integer idias = Integer.parseInt(dias);
-			if (idias < 1 || idias > 3)
+		validarDias(pruebaForm.getDias(), errores);
+		validarNotificaciones(pruebaForm.getNotificaciones(), errores);
+		validarCantidad(pruebaForm.getCantidad(), errores);
+		validarNombre(pruebaForm.getNombre(), errores);
+		validarComentarios(pruebaForm.getComentarios(), errores);
+		validarOculto(pruebaForm.getOculto(), errores);
+
+		// Redirección
+		// Atributos para la redirección
+		request.setAttribute("errores", errores);
+		request.setAttribute("pruebaForm", pruebaForm);
+		
+		getServletContext()
+			.getRequestDispatcher("/mostrar-prueba") // mapping válido del lado del servidor
+			.forward(request, response);
+	}
+
+	private void validarOculto(String oculto, List<String> errores) {
+		try {
+			oculto.trim();
+		} catch(Exception e) {
+			errores.add("Oculto inválido");
+		}
+	}
+
+	private void validarComentarios(String comentarios, List<String> errores) {
+		try {
+			comentarios.trim();
+		} catch(Exception e) {
+			errores.add("Comentarios inválidos");
+		}
+	}
+
+	private void validarNombre(String nombre, List<String> errores) {
+		try {
+			nombre.trim();
+			if (nombre.length() == 0)
 				throw new Exception();
 		} catch(Exception e) {
-			errores.add("Días inválidos");
+			errores.add("Nombre inválido");
 		}
-		
-		// Notificaciones
-		try {
-			Boolean.parseBoolean(notificaciones);
-		} catch(Exception e) {
-			errores.add("Notificación inválida");
-		}
-		
-		// Cantidad
+	}
+
+	private void validarCantidad(String cantidad, List<String> errores) {
 		try {
 			int icantidad = Integer.parseInt(cantidad);
 			if (icantidad < 0)
@@ -52,56 +86,24 @@ public class ProcesarPruebaServlet extends HttpServlet {
 			errores.add("Cantidad inválida");
 		}
 		
-		// Nombre
+	}
+
+	private void validarNotificaciones(String notificaciones, List<String> errores) {
 		try {
-			nombre.trim();
-			if (nombre.length() == 0)
+			Boolean.parseBoolean(notificaciones);
+		} catch(Exception e) {
+			errores.add("Notificación inválida");
+		}
+	}
+
+	private void validarDias(String dias, List<String> errores) {
+		try { 
+			Integer idias = Integer.parseInt(dias);
+			if (idias < 1 || idias > 3)
 				throw new Exception();
 		} catch(Exception e) {
-			errores.add("Nombre inválido");
+			errores.add("Días inválidos");
 		}
-		
-		// Comentarios
-		try {
-			comentarios.trim();
-		} catch(Exception e) {
-			errores.add("Comentarios inválidos");
-		}
-
-		// Oculto
-		try {
-			oculto.trim();
-		} catch(Exception e) {
-			errores.add("Oculto inválido");
-		}
-		
-		// Impresión
-		PrintWriter pw = response.getWriter();
-		pw.println("<html>");
-		
-		pw.println("<head>");
-		pw.println("<title>Resultado de pruebas</title>");
-		pw.println("</head>");
-		
-		pw.println("<body>");
-		
-		if (errores.size() > 0) {
-			pw.println("<ul>");
-			for (String e : errores)
-				pw.println("<li>" + e + "</li>");
-			pw.println("</ul>");
-		} else {
-			pw.println("Días: " + dias + "<br>");
-			pw.println("Notiticaciones: " + notificaciones + "<br>");
-			pw.println("Cantidad: " + cantidad + "<br>");
-			pw.println("Nombre: " + nombre + "<br>");
-			pw.println("Comentarios: " + comentarios + "<br>");
-			pw.println("Oculto: " + oculto + "<br>");
-		}
-
-		pw.println("</body>");
-		
-		pw.println("</html>");
 	}
 
 }
