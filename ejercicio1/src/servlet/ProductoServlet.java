@@ -16,10 +16,14 @@ public class ProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductoService productoService = ProductoServiceFactory.createProductoService();
-		request.setAttribute("productos", productoService.obtenerTodos());
+		ProductoService productoService = 
+				ProductoServiceFactory.createProductoService();
+		request.setAttribute("productos", 
+				productoService.obtenerTodos());
+		
 		getServletContext()
-			.getRequestDispatcher("/producto-lista")
+			//.getRequestDispatcher("/producto-lista") // Servlet
+			.getRequestDispatcher("/WEB-INF/jsp/productos.jsp") // JSP
 			.forward(request, response);			
 	}
 

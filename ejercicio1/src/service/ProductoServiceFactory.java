@@ -1,5 +1,6 @@
 package service;
 
+// Singleton
 public abstract class ProductoServiceFactory {
 	private static ProductoService INSTANCE = new ProductoServiceDummy();
 	
