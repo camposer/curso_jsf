@@ -29,10 +29,10 @@ public class PruebaServlet extends HttpServlet {
 		pw.println("				<td>Días necesarios:</td>");
 		pw.println("				<td>");
 		
-		for (int i = 0; i < 10; i++) {
-			pw.println("					" + i 
+		for (int i = 0; i < 3; i++) {
+			pw.println("					" + (i+1) 
 					+ "<input type='radio' name='dias' "
-					+ "value='" + i + "'>");
+					+ "value='" + (i+1) + "'>");
 		}
 		
 		pw.println("				</td>");

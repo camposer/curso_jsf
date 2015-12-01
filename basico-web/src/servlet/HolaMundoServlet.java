@@ -40,7 +40,7 @@ public class HolaMundoServlet extends HttpServlet {
 		if (nombre != null && apellido != null) {
 			pw.println("Hola " + nombre + " " + apellido + "<br>");
 		} else {
-			pw.println("<form>");
+			pw.println("<form method='post'");
 			pw.println("Nombre: <input type='text' name='nombre'><br>");
 			pw.println("Apellido: <input type='text' name='apellido'><br>");
 			pw.println("<input type='submit' value='enviar'><br>");
@@ -49,6 +49,11 @@ public class HolaMundoServlet extends HttpServlet {
 		
 		pw.println("</body>");
 		pw.println("</html>");
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 
 }
