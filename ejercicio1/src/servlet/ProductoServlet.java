@@ -19,9 +19,8 @@ public class ProductoServlet extends HttpServlet {
 		ProductoService productoService = ProductoServiceFactory.createProductoService();
 		request.setAttribute("productos", productoService.obtenerTodos());
 		getServletContext()
-		.getRequestDispatcher("/WEB-INF/jsp/productos.jsp")
-		.forward(request, response);
-			
+			.getRequestDispatcher("/producto-lista")
+			.forward(request, response);			
 	}
 
 }
