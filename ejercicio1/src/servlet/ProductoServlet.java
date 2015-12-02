@@ -26,5 +26,10 @@ public class ProductoServlet extends HttpServlet {
 			.getRequestDispatcher("/WEB-INF/jsp/productos.jsp") // JSP
 			.forward(request, response);			
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 
 }

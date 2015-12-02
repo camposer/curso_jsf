@@ -41,11 +41,41 @@
 		#tabla-form tr:last-child td {
 			text-align: center;
 		}
+		
+		#tabla-form input[type=text],
+		#tabla-form input[type=number] {
+			width: 200px;
+		}
+		
+		.errores {
+			text-align: center;
+			background-color: red;
+		}
 	</style>
 </head>
 <body>
 	<h1>Productos</h1>
-	<form novalidate>
+	
+	<%
+		List<String> errores = (List<String>)
+			session.getAttribute("errores");
+		if (errores != null && errores.size() > 0) {
+	%>
+		<ul class="errores">
+		<%
+			for (String e : errores) {
+		%>
+			<li><%= e %></li>
+		<%
+			}
+		%>
+		</ul>
+	<%
+			session.removeAttribute("errores");
+		}
+	%>
+	
+	<form action="productos-agregar" method="post" novalidate>
 		<table id="tabla-form" class="tabla-centrada">
 			<tr>
 				<td>Nombre</td>
@@ -53,12 +83,12 @@
 			</tr>
 			<tr>
 				<td>Precio</td>
-				<td><input type="number" name="nombre">
+				<td><input type="number" name="precio">
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" name="modificar" value="Modificar">
-					<input type="submit" name="agregar" value="Agregar">
+					<input type="submit" name="operacion" value="Modificar">
+					<input type="submit" name="operacion" value="Agregar">
 				</td>
 			</tr>
 		</table>
@@ -73,7 +103,8 @@
 			<th>Precio</th>
 		</tr>	
 	<% 
-		List<Producto> productos = (List<Producto>)request.getAttribute("productos");
+		List<Producto> productos = 
+		(List<Producto>)request.getAttribute("productos");
 		if (productos != null) for (Producto p : productos) {
 	%>
 	<!-- Esto es un comentario -->
