@@ -7,51 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Productos</title>
-	<style>
-		h1 {
-			text-align: center;
-		}
-		
-		table.tabla-centrada {
-			margin-left: auto;
-			margin-right: auto;
-		}		
-		
-		table.tabla-datos th {
-			background-color: gray;
-		}
-
-		table.tabla-datos tr:nth-child(odd) td {
-			background-color: lightgray;
-		}
-
-		table.tabla-datos tr:nth-child(even) td {
-			background-color: darkgray;
-		}
-		
-		#tabla-productos {
-			width: 80%;
-		}
-
-		#tabla-productos td:nth-child(1),
-		#tabla-productos td:nth-child(3) {
-			text-align: center;
-		}
-
-		#tabla-form tr:last-child td {
-			text-align: center;
-		}
-		
-		#tabla-form input[type=text],
-		#tabla-form input[type=number] {
-			width: 200px;
-		}
-		
-		.errores {
-			text-align: center;
-			background-color: red;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/comun.css">
+	<link rel="stylesheet" type="text/css" href="css/productos.css">
 </head>
 <body>
 	<h1>Productos</h1>
@@ -101,6 +58,8 @@
 			<th>Id</th>
 			<th>Nombre</th>
 			<th>Precio</th>
+			<th>Mostrar</th>
+			<th>Eliminar</th>
 		</tr>	
 	<% 
 		List<Producto> productos = 
@@ -112,6 +71,10 @@
 			<td><%= p.getId() %></td>
 			<td><%= p.getNombre() %></td>
 			<td><%= p.getPrecio() %></td>
+			<td><a href="#">mostrar</a></td>
+			<td><a 
+				href="/ejercicio1/productos-eliminar?id=<%= p.getId() %>"
+				onclick="javascript:return confirm('Eliminar?')">eliminar</a></td>
 		</tr>
 	<%
 		}
