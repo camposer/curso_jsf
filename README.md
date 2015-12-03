@@ -24,3 +24,5 @@
 	- http://es.slideshare.net/enriquepolo9/javaserver-faces-jsf
 - Documentación oficial
 	- http://www.oracle.com/technetwork/java/javaee/javaserverfaces-139869.html
+- Configuring JSF and JSTL Libraries
+	- https://docs.oracle.com/cd/E15523_01/web.1111/e13712/configurejsfandjtsl.htm#WBAPP197
