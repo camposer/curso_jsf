@@ -31,16 +31,30 @@
 			session.removeAttribute("errores");
 		}
 	%>
-	
+
+	<%
+		Producto producto = 
+			(Producto)session.getAttribute("producto");
+		String nombre = "";
+		String precio = "";
+		if (producto != null) {
+			nombre = producto.getNombre();
+			precio = Double.toString(producto.getPrecio());
+		}
+	%>	
 	<form action="productos-agregar" method="post" novalidate>
 		<table id="tabla-form" class="tabla-centrada">
 			<tr>
 				<td>Nombre</td>
-				<td><input type="text" name="nombre">
+				<td><input type="text" 
+					name="nombre"
+					value="<%= nombre %>">
 			</tr>
 			<tr>
 				<td>Precio</td>
-				<td><input type="number" name="precio">
+				<td><input type="number" 
+					name="precio"
+					value="<%= precio %>">
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -71,7 +85,7 @@
 			<td><%= p.getId() %></td>
 			<td><%= p.getNombre() %></td>
 			<td><%= p.getPrecio() %></td>
-			<td><a href="#">mostrar</a></td>
+			<td><a href="/ejercicio1/productos-mostrar?id=<%= p.getId() %>">mostrar</a></td>
 			<td><a 
 				href="/ejercicio1/productos-eliminar?id=<%= p.getId() %>"
 				onclick="javascript:return confirm('Eliminar?')">eliminar</a></td>
