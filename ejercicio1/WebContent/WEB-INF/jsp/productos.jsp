@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,51 +14,29 @@
 <body>
 	<h1>Productos</h1>
 	
-	<%
-		List<String> errores = (List<String>)
-			session.getAttribute("errores");
-		if (errores != null && errores.size() > 0) {
-	%>
+	<c:if test="${not empty sessionScope.errores}">
 		<ul class="errores">
-		<%
-			for (String e : errores) {
-		%>
-			<li><%= e %></li>
-		<%
-			}
-		%>
+		<c:forEach var="e" items="${errores}">
+			<li>${e}</li>
+		</c:forEach>
 		</ul>
-	<%
-			session.removeAttribute("errores");
-		}
-	%>
+	</c:if>
+	<% session.removeAttribute("errores"); %>
 
-	<%
-		Producto producto = 
-			(Producto)session.getAttribute("producto");
-		String id = "";
-		String nombre = "";
-		String precio = "";
-		if (producto != null) {
-			id = Long.toString(producto.getId());
-			nombre = producto.getNombre();
-			precio = Double.toString(producto.getPrecio());
-		}
-	%>
 	<form action="productos-guardar" method="post" novalidate>
-		<input type="hidden" name="id" value="<%= id %>">
+		<input type="hidden" name="id" value="${producto.id}">
 		<table id="tabla-form" class="tabla-centrada">
 			<tr>
 				<td>Nombre</td>
 				<td><input type="text" 
 					name="nombre"
-					value="<%= nombre %>">
+					value="${sessionScope.producto.nombre}">
 			</tr>
 			<tr>
 				<td>Precio</td>
 				<td><input type="number" 
 					name="precio"
-					value="<%= precio %>">
+					value="${producto.precio}">
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -78,24 +57,17 @@
 			<th>Mostrar</th>
 			<th>Eliminar</th>
 		</tr>	
-	<% 
-		List<Producto> productos = 
-		(List<Producto>)request.getAttribute("productos");
-		if (productos != null) for (Producto p : productos) {
-	%>
-	<!-- Esto es un comentario -->
+	<c:forEach var="p" items="${requestScope.productos}">
 		<tr>
-			<td><%= p.getId() %></td>
-			<td><%= p.getNombre() %></td>
-			<td><%= p.getPrecio() %></td>
-			<td><a href="/ejercicio1/productos-mostrar?id=<%= p.getId() %>">mostrar</a></td>
+			<td>${p.id}</td>
+			<td><c:out value="${p.nombre}"/></td>
+			<td>${p.precio}</td>
+			<td><a href="/ejercicio1/productos-mostrar?id=${p.id}">mostrar</a></td>
 			<td><a 
-				href="/ejercicio1/productos-eliminar?id=<%= p.getId() %>"
+				href="/ejercicio1/productos-eliminar?id=${p.id}"
 				onclick="javascript:return confirm('Eliminar?')">eliminar</a></td>
 		</tr>
-	<%
-		}
-	%>	
+	</c:forEach>
 	</table>
 </body>
 </html>
