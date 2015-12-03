@@ -15,25 +15,33 @@ import model.Producto;
 import service.ProductoService;
 import service.ProductoServiceFactory;
 
-@WebServlet("/productos-agregar")
-public class ProductoAgregarServlet extends HttpServlet {
+@WebServlet("/productos-guardar")
+public class ProductoGuardarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errores = new ArrayList<>();
 		
+		String sid = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		String sprecio = request.getParameter("precio");
-		String operacion = request.getParameter("operacion");
 		
 		Producto producto = new Producto();
 		
 		// Validar
+		try { // Id
+			long id = Long.parseLong(sid);
+			producto.setId(id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
 		try { // Nombre
 			if (nombre.trim().length() < 3)
 				throw new Exception();
 			producto.setNombre(nombre);
 		} catch(Exception e) {
+			e.printStackTrace();
 			errores.add("Nombre inválido");
 		}
 	
@@ -43,16 +51,22 @@ public class ProductoAgregarServlet extends HttpServlet {
 				throw new Exception();
 			producto.setPrecio(precio);
 		} catch(Exception e) {
+			e.printStackTrace();
 			errores.add("Precio inválido");
 		}
 		
-		// Agregar
+		HttpSession session = request.getSession();
 		if (errores.size() == 0) {
 			ProductoService productoService =
 					ProductoServiceFactory.createProductoService();
-			productoService.agregar(producto);
+
+			if (producto.getId() == null)
+				productoService.agregar(producto);
+			else {
+				productoService.modificar(producto);
+				session.removeAttribute("producto");
+			}
 		} else {
-			HttpSession session = request.getSession();
 			session.setAttribute("errores", errores);
 		}
 

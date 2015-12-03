@@ -35,14 +35,17 @@
 	<%
 		Producto producto = 
 			(Producto)session.getAttribute("producto");
+		String id = "";
 		String nombre = "";
 		String precio = "";
 		if (producto != null) {
+			id = Long.toString(producto.getId());
 			nombre = producto.getNombre();
 			precio = Double.toString(producto.getPrecio());
 		}
 	%>	
-	<form action="productos-agregar" method="post" novalidate>
+	<form action="productos-guardar" method="post" novalidate>
+		<input type="hidden" name="id" value="<%= id %>">
 		<table id="tabla-form" class="tabla-centrada">
 			<tr>
 				<td>Nombre</td>
@@ -58,8 +61,8 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" name="operacion" value="Modificar">
-					<input type="submit" name="operacion" value="Agregar">
+					<input type="button" value="Cancelar">
+					<input type="submit" value="Guardar">
 				</td>
 			</tr>
 		</table>

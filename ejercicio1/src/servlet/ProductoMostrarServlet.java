@@ -36,7 +36,8 @@ public class ProductoMostrarServlet extends HttpServlet {
 		if (errores.size() == 0) {
 			ProductoService productoService = 
 					ProductoServiceFactory.createProductoService();
-			session.setAttribute("producto", productoService.obtener(id));
+			session.setAttribute("producto", 
+					productoService.obtener(id));
 		} else {
 			session.setAttribute("errores", errores);
 		}
