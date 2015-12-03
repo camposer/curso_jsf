@@ -43,7 +43,7 @@
 			nombre = producto.getNombre();
 			precio = Double.toString(producto.getPrecio());
 		}
-	%>	
+	%>
 	<form action="productos-guardar" method="post" novalidate>
 		<input type="hidden" name="id" value="<%= id %>">
 		<table id="tabla-form" class="tabla-centrada">
