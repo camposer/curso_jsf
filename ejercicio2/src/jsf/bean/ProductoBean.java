@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import jsf.form.ProductoForm;
 import model.Producto;
@@ -84,6 +86,34 @@ public class ProductoBean {
 			ProductoService productoService = 
 					ProductoServiceFactory.createProductoService();
 			productoService.eliminar(id);
+		}
+		
+		return "productos?faces-redirect=true"; 
+	}
+	
+	public String mostrar() {
+		errores = new ArrayList<>();
+		
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String sid = request.getParameter("id");
+		long id = -1;
+		
+		try {
+			id = Long.parseLong(sid);
+			if (id < 0)
+				throw new Exception();
+		} catch(Exception e) {
+			e.printStackTrace();
+			errores.add("Id inválido");		
+		}
+		
+		if (errores.size() == 0) {
+			ProductoService productoService = 
+					ProductoServiceFactory.createProductoService();
+			Producto p = productoService.obtener(id);
+			productoForm.setId(p.getId() + "");
+			productoForm.setNombre(p.getNombre());
+			productoForm.setPrecio(p.getPrecio() + "");
 		}
 		
 		return "productos?faces-redirect=true"; 
