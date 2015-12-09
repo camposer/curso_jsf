@@ -72,9 +72,41 @@ public class ProductoBean {
 		} 
 
 		return "productos?faces-redirect=true"; 
-		
 	}
 	
+	public String eliminar(Long id) {
+		errores = new ArrayList<>();
+		
+		if (id < 0)
+			errores.add("Id inválido");
+		
+		if (errores.size() == 0) {
+			ProductoService productoService = 
+					ProductoServiceFactory.createProductoService();
+			productoService.eliminar(id);
+		}
+		
+		return "productos?faces-redirect=true"; 
+	}
+	
+	public String mostrar(Long id) {
+		errores = new ArrayList<>();
+		
+		if (id < 0)
+			errores.add("Id inválido");
+		
+		if (errores.size() == 0) {
+			ProductoService productoService = 
+					ProductoServiceFactory.createProductoService();
+			Producto p = productoService.obtener(id);
+			productoForm.setId(p.getId() + "");
+			productoForm.setNombre(p.getNombre());
+			productoForm.setPrecio(p.getPrecio() + "");
+		}
+		
+		return "productos?faces-redirect=true"; 
+	}
+
 	public List<Producto> getProductos() {
 		return productoService.obtenerTodos();
 	}

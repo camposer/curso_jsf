@@ -50,25 +50,34 @@
 	
 	<br/>
 		
-	<table id="tabla-productos" class="tabla-centrada tabla-datos">
-		<tr>
-			<th>Id</th>
-			<th>Nombre</th>
-			<th>Precio</th>
-			<th>Mostrar</th>
-			<th>Eliminar</th>
-		</tr>		
-	<c:forEach var="p" items="${productoBean.productos}">
-		<tr>
-			<td>${p.id}</td>
-			<td>${p.nombre}</td>
-			<td>${p.precio}</td>
-			<td><a href="/ejercicio2/productos-mostrar?id=${p.id}">mostrar</a></td>
-			<td><a 
-				href="/ejercicio2/productos-eliminar?id=${p.id}"
-				onclick="javascript:return confirm('Eliminar?')">eliminar</a></td>
-		</tr>
-	</c:forEach>
-	</table>
+	<h:form>
+		<table id="tabla-productos" class="tabla-centrada tabla-datos">
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Precio</th>
+				<th>Mostrar</th>
+				<th>Eliminar</th>
+			</tr>		
+		<c:forEach var="p" items="${productoBean.productos}">
+			<tr>
+				<td>${p.id}</td>
+				<td>${p.nombre}</td>
+				<td>${p.precio}</td>
+				<td>
+					<h:commandLink
+						action="#{productoBean.mostrar(p.id)}"
+						value="mostrar"/>
+				</td>
+				<td>
+					<h:commandLink
+						onclick="javascript:return confirm('Eliminar?')"
+						action="#{productoBean.eliminar(p.id)}"
+						value="eliminar"/>
+				</td>
+			</tr>
+		</c:forEach>
+		</table>
+	</h:form>
 </h:body>
 </html>
