@@ -28,3 +28,5 @@
 	- http://docs.oracle.com/javaee/5/tutorial/doc/bnakc.html
 - Configuring JSF and JSTL Libraries
 	- https://docs.oracle.com/cd/E15523_01/web.1111/e13712/configurejsfandjtsl.htm#WBAPP197
+- How can I pass selected row to commandLink inside dataTable?
+	- http://stackoverflow.com/questions/4994458/how-can-i-pass-selected-row-to-commandlink-inside-datatable
