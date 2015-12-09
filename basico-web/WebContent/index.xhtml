@@ -8,6 +8,12 @@
         <title>Hola mundo</title>
     </h:head>
     <h:body>
+    	<h:form>
+    		Nombre: <h:inputText value="#{holaMundo.nombre}" />
+    		<br/><h:commandButton value="Enviar" 
+    			action="#{holaMundo.enviar}" />
+    	</h:form>
+    
 		<h:outputText 
 			value="#{'Hola'}, un gusto saludarte #{holaMundo.nombre}"/>
 		

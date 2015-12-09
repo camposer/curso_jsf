@@ -1,0 +1,24 @@
+#tabla-productos {
+	width: 80%;
+}
+
+#tabla-productos td:nth-child(1),
+#tabla-productos td:nth-child(3),
+#tabla-productos td:nth-child(4),
+#tabla-productos td:nth-child(5) {
+	text-align: center;
+}
+
+#tabla-productos td:nth-child(4) a,
+#tabla-productos td:nth-child(5) a {
+	color: black;
+}
+
+#tabla-form tr:last-child td {
+	text-align: center;
+}
+
+#tabla-form input[type=text],
+#tabla-form input[type=number] {
+	width: 200px;
+}
