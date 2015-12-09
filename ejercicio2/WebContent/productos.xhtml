@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Productos</title>
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="css/comun.css"/>
+	<link rel="stylesheet" type="text/css" href="css/productos.css"/>
+</h:head>
+<h:body>
+	<h1>Productos</h1>
+	
+	<c:if test="${not empty productoBean.errores}">
+		<ul class="errores">
+		<c:forEach var="e" items="${productoBean.errores}">
+			<li>${e}</li>
+		</c:forEach>
+		</ul>
+	</c:if>
+
+	<h:form method="post">
+		<h:inputHidden value="#{productoBean.productoForm.id}"/>
+		
+		<table id="tabla-form" class="tabla-centrada">
+			<tr>
+				<td>Nombre</td>
+				<td><h:inputText
+						value="#{productoBean.productoForm.nombre}"/>
+				</td>
+			</tr>
+			<tr>
+				<td>Precio</td>
+				<td><h:inputText
+						value="#{productoBean.productoForm.precio}"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="Cancelar" />
+					<h:commandButton
+						action="#{productoBean.guardar}" 
+						value="Guardar"/>
+				</td>
+			</tr>
+		</table>
+	</h:form>
+	
+	<br/>
+		
+	<table id="tabla-productos" class="tabla-centrada tabla-datos">
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Precio</th>
+			<th>Mostrar</th>
+			<th>Eliminar</th>
+		</tr>		
+	<c:forEach var="p" items="${productoBean.productos}">
+		<tr>
+			<td>${p.id}</td>
+			<td>${p.nombre}</td>
+			<td>${p.precio}</td>
+			<td><a href="/ejercicio2/productos-mostrar?id=${p.id}">mostrar</a></td>
+			<td><a 
+				href="/ejercicio2/productos-eliminar?id=${p.id}"
+				onclick="javascript:return confirm('Eliminar?')">eliminar</a></td>
+		</tr>
+	</c:forEach>
+	</table>
+</h:body>
+</html>
