@@ -14,3 +14,5 @@ NOTAS/TIPS:
 	- La lógica de los servlets deberá llevarla a uno o varios Managed Beans (Ej. jsf.bean.ProductoBean)
 
 2.- Añadir validaciones y conversores al CRUD de Producto. La idea es transformar la clase ProductoForm para que ahora maneje los tipos adecuados.
+
+3.- Siguiendo el código de `basico-web` y el tutorial [JSF 2 internationalization example](http://www.mkyong.com/jsf2/jsf-2-internationalization-example/) añadir un *drop-down list* que permita cambiar el idioma en que se muestra la aplicación.

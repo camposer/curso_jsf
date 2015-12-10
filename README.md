@@ -20,8 +20,8 @@
 # Recursos
 
 - Diapositivas
-	- http://es.slideshare.net/bgjeecourse/java-server-faces-jsf-basics
 	- http://es.slideshare.net/enriquepolo9/javaserver-faces-jsf
+	- http://es.slideshare.net/bgjeecourse/java-server-faces-jsf-basics
 - Documentación oficial
 	- http://www.oracle.com/technetwork/java/javaee/javaserverfaces-139869.html
 - JavaServer Pages Standard Tag Library
@@ -30,3 +30,7 @@
 	- https://docs.oracle.com/cd/E15523_01/web.1111/e13712/configurejsfandjtsl.htm#WBAPP197
 - How can I pass selected row to commandLink inside dataTable?
 	- http://stackoverflow.com/questions/4994458/how-can-i-pass-selected-row-to-commandlink-inside-datatable
+- Customize validation error message in JSF 2.0
+	- http://www.mkyong.com/jsf2/customize-validation-error-message-in-jsf-2-0/
+- JSF 2 internationalization example
+	- http://www.mkyong.com/jsf2/jsf-2-internationalization-example/

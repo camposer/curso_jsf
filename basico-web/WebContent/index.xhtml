@@ -9,14 +9,16 @@
     </h:head>
     <h:body>
     	<h:form>
-    		<h:messages/>
+    		<h:messages globalOnly="true"/>
     		<br/>
     		
-    		Nombre: 
+    		<h:outputText value="#{msg['label.nombre']}" /> 
     		<h:inputText id="nombre" 
     			value="#{holaMundo.nombre}" 
     			required="true"
-    			validator="#{holaMundo.validarNombre}" />
+    			validator="#{holaMundo.validarNombre}"
+    			requiredMessage="#{msg['input.error.requerido']}" />
+    			
     		<h:message for="nombre" errorStyle="color: red"/>
     		<br/>
     		<h:commandButton value="Enviar" 
