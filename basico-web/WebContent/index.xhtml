@@ -8,6 +8,13 @@
         <title>Hola mundo</title>
     </h:head>
     <h:body>
+		<h1>Hola mundo</h1>
+		
+		<h:outputText 
+			value="#{'Hola'}, un gusto saludarte #{holaMundo.nombre}"/>
+		
+
+    	<h2>Formulario con Validaciones</h2>
     	<h:form>
     		<h:messages globalOnly="true"/>
     		<br/>
@@ -25,10 +32,22 @@
     			action="#{holaMundo.enviar}" />
     	</h:form>
     
-		<h:outputText 
-			value="#{'Hola'}, un gusto saludarte #{holaMundo.nombre}"/>
-		
-		<hr/>
+    	<h2>Formulario con Ajax</h2>
+    	<h:form>
+    		<h:outputText value="#{msg['label.nombre']}" /> 
+    		<h:inputText id="nombre" value="#{holaMundo.nombre}"/>
+    		<br/>
+    		<h:outputText value="#{msg['label.edad']}" /> 
+    		<h:inputText id="edad" value="#{holaMundo.edad}"/>
+    		<br/>
+    		<h:commandButton value="Enviar vía Ajax">
+    			<f:ajax execute="nombre edad" render="salida"/>
+    		</h:commandButton>
+    		
+    		<h:outputText id="salida" value="#{holaMundo.saludo}"/>
+    	</h:form>
+
+		<h2>Tablas</h2>
 		
 		<table>
 			<tr>

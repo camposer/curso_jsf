@@ -16,6 +16,7 @@ import javax.faces.validator.ValidatorException;
 @SessionScoped
 public class HolaMundoBean {
 	private String nombre = "María";
+	private Integer edad = 18;
 	private List<String> numeros = 
 		Arrays.asList(new String[]{ "uno", "dos", "tres" });
 
@@ -41,6 +42,14 @@ public class HolaMundoBean {
 		this.numeros = numeros;
 	}
 	
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
+	}
+
 	public void validarNombre(FacesContext ctx,
 			UIComponent component, Object valor) {
 		
@@ -56,5 +65,12 @@ public class HolaMundoBean {
 					bundle.getString("input.nombre.error.longitudInvalida"));
 			throw new ValidatorException(mensaje);
 		}
+	}
+	
+	public String getSaludo() {
+		if (edad >= 18)
+			return "Felicitaciones " + nombre + ", tienes edad para conducir";
+		else
+			return "Lo siento " + nombre + ", aún no tienes edad para conducir";
 	}
 }

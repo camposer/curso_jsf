@@ -34,3 +34,7 @@
 	- http://www.mkyong.com/jsf2/customize-validation-error-message-in-jsf-2-0/
 - JSF 2 internationalization example
 	- http://www.mkyong.com/jsf2/jsf-2-internationalization-example/
+- Protege páginas XHTML en JSF
+	- http://jfrantello.appspot.com/protege-paginas-xhtml-en-jsf
+- JSF Seguridad y Roles en páginas
+	- http://www.arquitecturajava.com/jsf-seguridad-y-roles/
