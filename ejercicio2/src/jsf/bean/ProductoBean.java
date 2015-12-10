@@ -2,6 +2,7 @@ package jsf.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +11,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.ValidationException;
 
 import jsf.form.ProductoForm;
 import model.Producto;
@@ -55,11 +55,15 @@ public class ProductoBean {
 			UIComponent component, Object value) {
 		String nombre = (String)value;
 		
+		ResourceBundle bundle = 
+				ResourceBundle.getBundle("jsf.i18n.messages", 
+				ctx.getViewRoot().getLocale());
+		
 		if (nombre.trim().length() < 3) {
 			throw new ValidatorException(
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							"nombre",
-							"Nombre inválido"));
+							bundle.getString("productos.form.nombre.invalido")));
 		}
 	}
 	

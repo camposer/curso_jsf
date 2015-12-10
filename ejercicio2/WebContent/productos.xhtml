@@ -5,22 +5,24 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Productos</title>
+	<title><h:outputText value="#{msg['productos.titulo']}"/></title>
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="css/comun.css"/>
 	<link rel="stylesheet" type="text/css" href="css/productos.css"/>
 </h:head>
 <h:body>
-	<h1>Productos</h1>
+	<h:form>
+		<div style="text-align: right">
+			Language : 
+			<h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+				valueChangeListener="#{language.countryLocaleCodeChanged}">
+	   			<f:selectItems value="#{language.countriesInMap}" /> 
+	   		</h:selectOneMenu>
+		</div>
+	</h:form>
 	
-	<c:if test="${not empty productoBean.errores}">
-		<ul class="errores">
-		<c:forEach var="e" items="${productoBean.errores}">
-			<li>${e}</li>
-		</c:forEach>
-		</ul>
-	</c:if>
-
+	<h1><h:outputText value="#{msg['productos.titulo']}"/></h1>
+	
 	<h:form method="post">
 		<h:messages globalOnly="true" errorStyle="color: red; text-align: center"/>
 	
@@ -30,36 +32,37 @@
 		
 		<table id="tabla-form" class="tabla-centrada">
 			<tr>
-				<td>Nombre</td>
+				<td><h:outputText value="#{msg['productos.form.nombre']}"/></td>
 				<td><h:inputText
 						id="nombre"
 						value="#{productoBean.productoForm.nombre}"
 						required="true"
-						requiredMessage="Nombre requerido"
+						requiredMessage="#{msg['productos.form.nombre.requerido']}"
 						validator="#{productoBean.validarNombre}"
 					/>
 					<h:message for="nombre" errorStyle="color: red"/>
 				</td>
 			</tr>
 			<tr>
-				<td>Precio</td>
+				<td><h:outputText value="#{msg['productos.form.precio']}"/></td>
 				<td><h:inputText
 						id="precio"
 						value="#{productoBean.productoForm.precio}"
 						required="true"
-						requiredMessage="Precio requerido"
+						requiredMessage="#{msg['productos.form.precio.requerido']}"
 						validator="#{productoBean.validarPrecio}"
 						converter="javax.faces.Double"
-						converterMessage="Precio inválido"/>
+						converterMessage="#{msg['productos.form.precio.invalido']}"/>
 					<h:message for="precio" errorStyle="color: red"/>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="button" value="Cancelar" />
+					<input type="button" 
+						value="#{msg['productos.form.cancelar']}" />
 					<h:commandButton
 						action="#{productoBean.guardar}" 
-						value="Guardar"/>
+						value="#{msg['productos.form.guardar']}"/>
 				</td>
 			</tr>
 		</table>
@@ -70,11 +73,11 @@
 	<h:form>
 		<table id="tabla-productos" class="tabla-centrada tabla-datos">
 			<tr>
-				<th>Id</th>
-				<th>Nombre</th>
-				<th>Precio</th>
-				<th>Mostrar</th>
-				<th>Eliminar</th>
+				<th><h:outputText value="#{msg['productos.tabla.id']}"/></th>
+				<th><h:outputText value="#{msg['productos.tabla.nombre']}"/></th>
+				<th><h:outputText value="#{msg['productos.tabla.precio']}"/></th>
+				<th><h:outputText value="#{msg['productos.tabla.mostrar']}"/></th>
+				<th><h:outputText value="#{msg['productos.tabla.eliminar']}"/></th>
 			</tr>		
 		<c:forEach var="p" items="${productoBean.productos}">
 			<tr>
@@ -84,13 +87,13 @@
 				<td>
 					<h:commandLink
 						action="#{productoBean.mostrar(p.id)}"
-						value="mostrar"/>
+						value="#{msg['productos.tabla.mostrar']}"/>
 				</td>
 				<td>
 					<h:commandLink
 						onclick="javascript:return confirm('Eliminar?')"
 						action="#{productoBean.eliminar(p.id)}"
-						value="eliminar"/>
+						value="#{msg['productos.tabla.eliminar']}"/>
 				</td>
 			</tr>
 		</c:forEach>
