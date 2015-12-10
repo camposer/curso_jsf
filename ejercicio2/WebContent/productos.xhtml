@@ -22,20 +22,36 @@
 	</c:if>
 
 	<h:form method="post">
-		<h:inputHidden value="#{productoBean.productoForm.id}"/>
+		<h:messages globalOnly="true" errorStyle="color: red; text-align: center"/>
+	
+		<h:inputHidden 
+			value="#{productoBean.productoForm.id}"
+			converter="javax.faces.Long"/>
 		
 		<table id="tabla-form" class="tabla-centrada">
 			<tr>
 				<td>Nombre</td>
 				<td><h:inputText
-						value="#{productoBean.productoForm.nombre}"/>
+						id="nombre"
+						value="#{productoBean.productoForm.nombre}"
+						required="true"
+						requiredMessage="Nombre requerido"
+						validator="#{productoBean.validarNombre}"
+					/>
+					<h:message for="nombre" errorStyle="color: red"/>
 				</td>
 			</tr>
 			<tr>
 				<td>Precio</td>
 				<td><h:inputText
-						value="#{productoBean.productoForm.precio}">
-					</h:inputText>
+						id="precio"
+						value="#{productoBean.productoForm.precio}"
+						required="true"
+						requiredMessage="Precio requerido"
+						validator="#{productoBean.validarPrecio}"
+						converter="javax.faces.Double"
+						converterMessage="Precio inválido"/>
+					<h:message for="precio" errorStyle="color: red"/>
 				</td>
 			</tr>
 			<tr>

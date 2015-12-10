@@ -1,15 +1,15 @@
 package jsf.form;
 
 public class ProductoForm {
-	private String id;
+	private Long id;
 	private String nombre;
-	private String precio;
+	private Double precio;
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -21,11 +21,11 @@ public class ProductoForm {
 		this.nombre = nombre;
 	}
 	
-	public String getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 	
-	public void setPrecio(String precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 }
