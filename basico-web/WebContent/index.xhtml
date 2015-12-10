@@ -9,8 +9,17 @@
     </h:head>
     <h:body>
     	<h:form>
-    		Nombre: <h:inputText value="#{holaMundo.nombre}" />
-    		<br/><h:commandButton value="Enviar" 
+    		<h:messages/>
+    		<br/>
+    		
+    		Nombre: 
+    		<h:inputText id="nombre" 
+    			value="#{holaMundo.nombre}" 
+    			required="true"
+    			validator="#{holaMundo.validarNombre}" />
+    		<h:message for="nombre" errorStyle="color: red"/>
+    		<br/>
+    		<h:commandButton value="Enviar" 
     			action="#{holaMundo.enviar}" />
     	</h:form>
     

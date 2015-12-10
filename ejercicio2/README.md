@@ -12,3 +12,5 @@ NOTAS/TIPS:
 - Deberá cambiar la URL por algo del tipo: http://localhost:8080/ejercicio2/productos.jsf
 	- Esto requiere un nuevo fichero productos.xhtml basado en el productos.jsp inicial
 	- La lógica de los servlets deberá llevarla a uno o varios Managed Beans (Ej. jsf.bean.ProductoBean)
+
+2.- Añadir validaciones y conversores al CRUD de Producto. La idea es transformar la clase ProductoForm para que ahora maneje los tipos adecuados.
